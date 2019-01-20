@@ -1,0 +1,55 @@
+﻿<Window x:Class="FitnessClub.Views.MainView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:LocalControl="clr-namespace:FitnessClub.Views" 
+    Title="Fitness.Club" Height="728" Width="1080"
+    Background="{DynamicResource MainBackgroundBrush}"
+    ResizeMode="CanMinimize" Icon="..\FitnessClub.ico" WindowStartupLocation="CenterScreen" >
+
+    <!-- ShortCut KeyBoard-->
+    <Window.InputBindings>
+        <KeyBinding Key="Q" Modifiers="Control" Command="{Binding ExitCommand}" />
+    </Window.InputBindings>
+    <DockPanel>
+        <Border Height="50" DockPanel.Dock="Top" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,0,0,1" x:Name="HeaderBorder" Padding="10,0,10,0" >
+            <DockPanel x:Name="Header" >
+                <TextBlock xml:space="preserve" Opacity="1" FontFamily="Segoe UI" FontSize="24" FontStretch="Normal" FontWeight="Light" TextWrapping="Wrap" Foreground="{DynamicResource HeaderFontColor}" VerticalAlignment="Bottom" Margin="0,0,0,5"><Run Foreground="#FFCFD3DA">Fitness</Run><Run FontWeight="Normal">.Club</Run></TextBlock>
+                <!--<Rectangle Fill="{DynamicResource OGITREV}" Stroke="{x:Null}" HorizontalAlignment="Right" Margin="0,0,0,12" x:Name="Vertigo" Width="120" Height="18" DockPanel.Dock="Right" VerticalAlignment="Bottom" MouseLeftButtonUp="Vertigo_MouseLeftButtonUp" Cursor="Hand"/>-->
+            </DockPanel>
+        </Border>
+
+        <!-- Menu Area -->
+        <Border x:Name="MenuBorder" VerticalAlignment="Top" DockPanel.Dock="Top" Margin="0,5,0,5">
+            <Menu VerticalAlignment="Bottom" Margin="5,0,0,0" Style="{DynamicResource MenuStyle}">
+                <MenuItem Header="_File" x:Name="FileMenu" Style="{DynamicResource MenuItemStyle}">
+                    <MenuItem Header="_Exit" Command="{Binding ExitCommand}" InputGestureText="Ctrl+Q"/>
+                </MenuItem>
+                <MenuItem Header="_Edit" x:Name="EditMenu" Style="{DynamicResource MenuItemStyle}">
+                    <MenuItem Header="Copy" Command="Copy"/>
+                    <MenuItem Header="Cut" Command="Cut"/>
+                    <MenuItem Header="Paste" Command="Paste"/>
+                </MenuItem>
+                <MenuItem Header="_Aide" x:Name="AideMenu" Style="{DynamicResource MenuItemStyle}">
+                    <MenuItem Header="A propos" Command="{Binding ProposCommand}"/>
+                </MenuItem>
+            </Menu>
+        </Border>
+        <!--Menu-->
+        <Grid x:Name="DiagramPane" Margin="10,10,10,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition SharedSizeGroup="column1" Width="300"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+        	<GridSplitter Width="3" Grid.Column="0" HorizontalAlignment="Right" Background="{DynamicResource MainBackgroundBrush}" BorderThickness="0,10,0,10"/>
+            <LocalControl:MemberView x:Name="memberView" Margin="0,0,10,0"/>
+        </Grid>
+        <!--Grid-->
+        <Grid x:Name="DetailsPane" Visibility="Visible" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="column1CloneForLayer0" SharedSizeGroup="column1" />
+            </Grid.ColumnDefinitions>
+            <LocalControl:AbonnementView SelectedMember="{Binding Path=DataContext.SelectedMember, ElementName=memberView}" />
+                
+        </Grid>
+    </DockPanel>
+</Window>

@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FitnessClubModel.Store" Alias="Self" Provider="System.Data.SqlServerCe.3.5" ProviderManifestToken="3.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="FitnessClubModelStoreContainer">
+          <EntitySet Name="Abonnement" EntityType="FitnessClubModel.Store.Abonnement" store:Type="Tables" />
+          <EntitySet Name="Member" EntityType="FitnessClubModel.Store.Member" store:Type="Tables" />
+          <AssociationSet Name="Abonnement_MemberId_Member_MemberId" Association="FitnessClubModel.Store.Abonnement_MemberId_Member_MemberId">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Abonnement" EntitySet="Abonnement" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Abonnement">
+          <Key>
+            <PropertyRef Name="AbonnementId" />
+          </Key>
+          <Property Name="AbonnementId" Type="int" Nullable="false" />
+          <Property Name="DateInscription" Type="datetime" />
+          <Property Name="TypeAbonnement" Type="nvarchar" MaxLength="100" />
+          <Property Name="Photo" Type="nvarchar" MaxLength="100" />
+          <Property Name="Certificat" Type="nvarchar" MaxLength="100" />
+          <Property Name="FinAbonnement" Type="datetime" />
+          <Property Name="MemberId" Type="int" Nullable="false" />
+          <Property Name="modify" Type="datetime" />
+          <Property Name="TypePaiment" Type="nvarchar" MaxLength="100" />
+          <Property Name="Commentaire" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="MemberId" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Mail" Type="nvarchar" MaxLength="100" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="100" />
+          <Property Name="Portable" Type="nvarchar" MaxLength="100" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" />
+          <Property Name="ZipCode" Type="nvarchar" MaxLength="100" />
+          <Property Name="Country" Type="nvarchar" MaxLength="100" />
+          <Property Name="modify" Type="datetime" />
+        </EntityType>
+        <Association Name="Abonnement_MemberId_Member_MemberId">
+          <End Role="Member" Type="FitnessClubModel.Store.Member" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Abonnement" Type="FitnessClubModel.Store.Abonnement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="Abonnement">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FitnessClubModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="FitnessClubEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Abonnement" EntityType="FitnessClubModel.Abonnement" />
+          <EntitySet Name="Member" EntityType="FitnessClubModel.Member" />
+          <AssociationSet Name="Abonnement_MemberId_Member_MemberId" Association="FitnessClubModel.Abonnement_MemberId_Member_MemberId">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Abonnement" EntitySet="Abonnement" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Abonnement">
+          <Key>
+            <PropertyRef Name="AbonnementId" />
+          </Key>
+          <Property Name="AbonnementId" Type="Int32" Nullable="false" />
+          <Property Name="DateInscription" Type="DateTime" />
+          <Property Name="TypeAbonnement" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Photo" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Certificat" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="FinAbonnement" Type="DateTime" />
+          <Property Name="MemberId" Type="Int32" Nullable="false" />
+          <Property Name="modify" Type="DateTime" />
+          <Property Name="TypePaiment" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Commentaire" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Member" Relationship="FitnessClubModel.Abonnement_MemberId_Member_MemberId" FromRole="Abonnement" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="MemberId" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Mail" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Phone" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Portable" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Address" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Country" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="modify" Type="DateTime" />
+          <NavigationProperty Name="Abonnement" Relationship="FitnessClubModel.Abonnement_MemberId_Member_MemberId" FromRole="Member" ToRole="Abonnement" />
+        </EntityType>
+        <Association Name="Abonnement_MemberId_Member_MemberId">
+          <End Role="Member" Type="FitnessClubModel.Member" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Abonnement" Type="FitnessClubModel.Abonnement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="Abonnement">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FitnessClubModelStoreContainer" CdmEntityContainer="FitnessClubEntities">
+          <EntitySetMapping Name="Abonnement"><EntityTypeMapping TypeName="FitnessClubModel.Abonnement"><MappingFragment StoreEntitySet="Abonnement">
+            <ScalarProperty Name="AbonnementId" ColumnName="AbonnementId" />
+            <ScalarProperty Name="DateInscription" ColumnName="DateInscription" />
+            <ScalarProperty Name="TypeAbonnement" ColumnName="TypeAbonnement" />
+            <ScalarProperty Name="Photo" ColumnName="Photo" />
+            <ScalarProperty Name="Certificat" ColumnName="Certificat" />
+            <ScalarProperty Name="FinAbonnement" ColumnName="FinAbonnement" />
+            <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+            <ScalarProperty Name="modify" ColumnName="modify" />
+            <ScalarProperty Name="TypePaiment" ColumnName="TypePaiment" />
+            <ScalarProperty Name="Commentaire" ColumnName="Commentaire" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Member"><EntityTypeMapping TypeName="FitnessClubModel.Member"><MappingFragment StoreEntitySet="Member">
+            <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+            <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+            <ScalarProperty Name="LastName" ColumnName="LastName" />
+            <ScalarProperty Name="Mail" ColumnName="Mail" />
+            <ScalarProperty Name="Phone" ColumnName="Phone" />
+            <ScalarProperty Name="Portable" ColumnName="Portable" />
+            <ScalarProperty Name="Address" ColumnName="Address" />
+            <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+            <ScalarProperty Name="Country" ColumnName="Country" />
+            <ScalarProperty Name="modify" ColumnName="modify" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="FitnessClub">
+        <EntityTypeShape EntityType="FitnessClubModel.Abonnement" Width="1.5" PointX="3" PointY="1" Height="3.1340950520833335" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitnessClubModel.Member" Width="1.5" PointX="0.75" PointY="1" Height="3.1340950520833322" IsExpanded="true" />
+        <AssociationConnector Association="FitnessClubModel.Abonnement_MemberId_Member_MemberId" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="2.5670475260416659" />
+          <ConnectorPoint PointX="3" PointY="2.5670475260416659" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
